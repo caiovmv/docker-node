@@ -2,7 +2,9 @@ FROM debian:latest
 
 RUN apt-get update && apt-get upgrade -y
 RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
-RUN apt-get install -y nodejs git bash ftp telnet wget curl
+RUN apt-get install -y nodejs
+RUN apt-get install -y git bash ftp telnet wget curl
+
 
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
