@@ -7,5 +7,8 @@ WORKDIR /usr/src/app
 
 ADD src/package.tar /usr/src/app/
 
+RUN npm cache clean
+RUN npm install
+
 CMD [ "npm", "start" ]
 
