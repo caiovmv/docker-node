@@ -1,7 +1,7 @@
 FROM debian:latest
 
 RUN apt-get update && apt-get upgrade -y
-RUN apt-get install -y git -bash ftp telnet wget curl
+RUN apt-get install -y git bash ftp telnet wget curl
 
 RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
 RUN apt-get install -y nodejs
