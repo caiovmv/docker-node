@@ -9,10 +9,12 @@ RUN apt-get install -y nodejs
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
-ADD src/package.tar /usr/src/app/
+COPY src/package.tar /usr/src/app/
+
+RUN tar -xvf package.tar
 
 RUN npm cache clean
 RUN npm install
 
 CMD [ "npm", "start" ]
-
+#CMD [ "bash" ]
