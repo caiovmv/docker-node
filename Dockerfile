@@ -1,4 +1,5 @@
-FROM debian:latest
+FROM ubuntu:16.04
+ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update && apt-get upgrade -y
 RUN apt-get install -y git bash ftp telnet wget curl build-essential gcc g++ make autoconf keychain openssh-client
@@ -36,5 +37,5 @@ RUN npm install
 ENV HOST 0.0.0.0
 ENV PORT 80
 
-CMD [ "npm", "start" ]
-#CMD [ "bash" ]
+#CMD [ "npm", "start" ]
+CMD [ "/bin/bash" ]
