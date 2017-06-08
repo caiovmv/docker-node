@@ -34,6 +34,7 @@ RUN npm cache clean
 RUN npm install
 
 ENV HOST 0.0.0.0
+ENV PORT 80
 
-CMD [ "npm", "server:prod" ]
+CMD [ "npm", "start" ]
 #CMD [ "bash" ]
