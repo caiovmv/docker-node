@@ -33,5 +33,7 @@ export class ConfigUrl { \
 RUN npm cache clean
 RUN npm install
 
+ENV HOST 0.0.0.0
+
 CMD [ "npm", "start" ]
 #CMD [ "bash" ]
