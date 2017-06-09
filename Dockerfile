@@ -27,7 +27,8 @@ import { Subject }    from 'rxjs/Subject'; \
 export class ConfigUrl { \
     URL_BASE='http://sshosting005.fiesc.com.br/template/'; \
 } \
-" > src/app/config.ts \
+" > src/app/config.ts 
+
 #COPY src/package.tar /usr/src/app/
 #RUN tar -xvf package.tar
 
