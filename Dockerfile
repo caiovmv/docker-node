@@ -25,7 +25,7 @@ RUN echo "import { Injectable } from '@angular/core'; \
 import { Subject }    from 'rxjs/Subject'; \
 @Injectable() \
 export class ConfigUrl { \
-    URL_BASE='http://sshosting003.fiesc.com.br/template/'; \
+    URL_BASE='http://sshosting003.fiesc.com.br:8080/template/'; \
 } \
 " > src/app/config.ts 
 
