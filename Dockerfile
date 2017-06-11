@@ -2,7 +2,7 @@ FROM ubuntu:16.04
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update && apt-get upgrade -y
-RUN apt-get install -y git bash ftp telnet vim  wget curl build-essential gcc g++ make autoconf keychain openssh-client
+RUN apt-get install -y git bash ftp telnet vim  wget curl build-essential gcc g++ make autoconf keychain openssh-client language-pack-en_US*
 
 RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
 RUN apt-get install -y nodejs net-tools 
