@@ -21,13 +21,13 @@ RUN chmod 600 /usr/src/app/id_rsa
 RUN ssh-agent bash -c 'ssh-add /usr/src/app/id_rsa; git clone git@bitbucket.org:AdminSesi/smarthealth.git'
 
 WORKDIR /usr/src/app/smarthealth/health/frontend
-RUN echo "import { Injectable } from '@angular/core'; \
-import { Subject }    from 'rxjs/Subject'; \
-@Injectable() \
-export class ConfigUrl { \
-    URL_BASE='http://sshosting003.fiesc.com.br:8080/template/'; \
-} \
-" > src/app/config.ts 
+#RUN echo "import { Injectable } from '@angular/core'; \
+#import { Subject }    from 'rxjs/Subject'; \
+#@Injectable() \
+#export class ConfigUrl { \
+#    URL_BASE='http://sshosting003.fiesc.com.br:8080/template/'; \
+#} \
+#" > src/app/config.ts 
 
 #COPY src/package.tar /usr/src/app/
 #RUN tar -xvf package.tar
