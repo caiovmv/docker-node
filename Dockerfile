@@ -29,8 +29,8 @@ WORKDIR /usr/src/app/smarthealth/health/frontend
 #} \
 #" > src/app/config.ts 
 
-#COPY src/package.tar /usr/src/app/
-#RUN tar -xvf package.tar
+COPY src/package.tar /usr/src/app/
+RUN tar -xvf package.tar
 
 RUN npm cache clean
 RUN npm install
