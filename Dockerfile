@@ -72,13 +72,14 @@ RUN npm install
 ENV HOST 0.0.0.0
 ENV PORT 80
 
-RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
-    echo 'LANG="en_US.UTF-8"'>/etc/default/locale && \
-    dpkg-reconfigure --frontend=noninteractive locales && \
-    update-locale LANG=en_US.UTF-8
+#RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
+#    echo 'LANG="en_US.UTF-8"'>/etc/default/locale && \
+#    dpkg-reconfigure --frontend=noninteractive locales && \
+#    update-locale LANG=en_US.UTF-8
 
-ENV LANG en_US.UTF-8
-RUN locale-gen $LANG
+#ENV LANG en_US.UTF-8
+#RUN locale-gen $LANG
+
 #RUN mkdir /src
 #COPY ./src/package.tar /src
 #WORKDIR /src
