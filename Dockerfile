@@ -29,7 +29,7 @@ RUN ssh-agent bash -c 'ssh-add /usr/src/app/id_rsa; git clone git@bitbucket.org:
 #} \
 #" > src/app/config.ts 
 
-RUN rm -rf /usr/src/app/*
+#RUN rm -rf /usr/src/app/*
 COPY src/package.tar /usr/src/app/
 RUN tar -xvf package.tar
 
