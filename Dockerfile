@@ -50,9 +50,39 @@ RUN set -ex \
   && ln -s /opt/yarn/bin/yarn /usr/local/bin/yarnpkg \
   && rm yarn-v$YARN_VERSION.tar.gz.asc yarn-v$YARN_VERSION.tar.gz
 
-RUN mkdir /src
-COPY ./src/package.tar /src
-WORKDIR /src
-RUN tar -xvf package.tar
+RUN mkdir -p /usr/src/app
+RUN rm -f ~/.ssh/known_hosts
+COPY ./keys/id_rsa /usr/src/app
+RUN echo " StrictHostKeyChecking no"  >> /etc/ssh/ssh_config
+RUN chmod 600 /usr/src/app/id_rsa
+WORKDIR /usr/src/app/
+RUN ssh-agent bash -c 'ssh-add /usr/src/app/id_rsa; git clone git@bitbucket.org:AdminSesi/smarthealth.git'
+WORKDIR /usr/src/app/smarthealth/health/frontend
+RUN echo "import { Injectable } from '@angular/core'; \
+import { Subject }    from 'rxjs/Subject'; \
+@Injectable() \
+export class ConfigUrl { \
+    URL_BASE='https://api.qa.guidoo.com.br/template/'; \
+} \
+" > src/app/config.ts
+
+RUN npm cache clean
 RUN npm install
+
+ENV HOST 0.0.0.0
+ENV PORT 80
+
+RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
+    echo 'LANG="en_US.UTF-8"'>/etc/default/locale && \
+    dpkg-reconfigure --frontend=noninteractive locales && \
+    update-locale LANG=en_US.UTF-8
+
+ENV LANG en_US.UTF-8
+RUN locale-gen $LANG
+#RUN mkdir /src
+#COPY ./src/package.tar /src
+#WORKDIR /src
+#RUN tar -xvf package.tar
+
+#RUN npm install
 CMD [ "npm", "start" ]
