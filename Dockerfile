@@ -1,7 +1,7 @@
 FROM buildpack-deps:wheezy
 
 ARG BRANCH=develop
-ARC URL_BACKEND_API="https://api.qa.guidoo.com.br/template/"
+ARG URL_BACKEND_API="https://api.qa.guidoo.com.br/template/"
 
 ENV DEBIAN_FRONTEND noninteractive
 
