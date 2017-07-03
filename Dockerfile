@@ -1,4 +1,4 @@
-FROM buildpack-deps:wheezy
+FROM ubuntu:16.04
 
 ARG BRANCH=develop
 ARG URL_BACKEND_API="https://api.qa.guidoo.com.br/template/"
