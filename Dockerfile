@@ -4,6 +4,8 @@ ARG BRANCH=""
 ARG URL_BACKEND_API=""
 ENV DEBIAN_FRONTEND noninteractive
 
+RUN echo $BRANCH
+RUN echo $URL_BACKEND_API
 RUN apt-get update && apt-get upgrade -y
 RUN apt-get install -y git bash ftp telnet vim  wget curl build-essential gcc g++ make autoconf keychain openssh-client language-pack-en
 
@@ -65,7 +67,7 @@ RUN chmod 600 /usr/src/app/id_rsa
 WORKDIR /usr/src/app/
 RUN ssh-agent bash -c 'ssh-add /usr/src/app/id_rsa; git clone git@bitbucket.org:AdminSesi/smarthealth.git'
 WORKDIR /usr/src/app/smarthealth/health/frontend
-RUN git fetch && git checkout $BRANCH
+RUN ssh-agent bash -c 'ssh-add /usr/src/app/id_rsa; git fetch && git checkout $BRANCH'
 
 RUN echo "import { Injectable } from '@angular/core'; \
 import { Subject }    from 'rxjs/Subject'; \
