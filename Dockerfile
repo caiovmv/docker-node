@@ -1,8 +1,5 @@
 FROM ubuntu:16.04
 
-ARG BRANCH=develop
-ARG URL_BACKEND_API="https://api.qa.guidoo.com.br/template/"
-
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update && apt-get upgrade -y
