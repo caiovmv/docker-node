@@ -1,5 +1,7 @@
 FROM ubuntu:16.04
 
+ARG BRANCH=""
+ARG URL_BACKEND_API=""
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update && apt-get upgrade -y
@@ -62,9 +64,9 @@ RUN echo " StrictHostKeyChecking no"  >> /etc/ssh/ssh_config
 RUN chmod 600 /usr/src/app/id_rsa
 WORKDIR /usr/src/app/
 RUN ssh-agent bash -c 'ssh-add /usr/src/app/id_rsa; git clone git@bitbucket.org:AdminSesi/smarthealth.git'
+WORKDIR /usr/src/app/smarthealth/health/frontend
 RUN git fetch && git checkout $BRANCH
 
-WORKDIR /usr/src/app/smarthealth/health/frontend
 RUN echo "import { Injectable } from '@angular/core'; \
 import { Subject }    from 'rxjs/Subject'; \
 @Injectable() \
