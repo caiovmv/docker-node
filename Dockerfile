@@ -1,5 +1,13 @@
 FROM buildpack-deps:wheezy
 
+ARG BRANCH=develop
+ARC URL_BACKEND_API="https://api.qa.guidoo.com.br/template/"
+
+ENV DEBIAN_FRONTEND noninteractive
+
+RUN apt-get update && apt-get upgrade -y
+RUN apt-get install -y git bash ftp telnet vim  wget curl build-essential gcc g++ make autoconf keychain openssh-client language-pack-en
+
 RUN groupadd --gid 1000 node \
   && useradd --uid 1000 --gid node --shell /bin/bash --create-home node
 
@@ -57,12 +65,14 @@ RUN echo " StrictHostKeyChecking no"  >> /etc/ssh/ssh_config
 RUN chmod 600 /usr/src/app/id_rsa
 WORKDIR /usr/src/app/
 RUN ssh-agent bash -c 'ssh-add /usr/src/app/id_rsa; git clone git@bitbucket.org:AdminSesi/smarthealth.git'
+RUN git fetch && git checkout $BRANCH
+
 WORKDIR /usr/src/app/smarthealth/health/frontend
 RUN echo "import { Injectable } from '@angular/core'; \
 import { Subject }    from 'rxjs/Subject'; \
 @Injectable() \
 export class ConfigUrl { \
-    URL_BASE='https://api.qa.guidoo.com.br/template/'; \
+    URL_BASE='${URL_BACKEND_API}'; \
 } \
 " > src/app/config.ts
 
@@ -72,13 +82,13 @@ RUN npm install
 ENV HOST 0.0.0.0
 ENV PORT 80
 
-#RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
-#    echo 'LANG="en_US.UTF-8"'>/etc/default/locale && \
-#    dpkg-reconfigure --frontend=noninteractive locales && \
-#    update-locale LANG=en_US.UTF-8
+RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
+    echo 'LANG="en_US.UTF-8"'>/etc/default/locale && \
+    dpkg-reconfigure --frontend=noninteractive locales && \
+    update-locale LANG=en_US.UTF-8
 
-#ENV LANG en_US.UTF-8
-#RUN locale-gen $LANG
+ENV LANG en_US.UTF-8
+RUN locale-gen $LANG
 
 #RUN mkdir /src
 #COPY ./src/package.tar /src
