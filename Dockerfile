@@ -2,6 +2,8 @@ FROM ubuntu:16.04
 
 ARG BRANCH=""
 ARG URL_BACKEND_API=""
+ARG URL_WORDPRESS=""
+
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN echo $BRANCH
@@ -74,6 +76,7 @@ import { Subject }    from 'rxjs/Subject'; \
 @Injectable() \
 export class ConfigUrl { \
     URL_BASE='${URL_BACKEND_API}'; \
+    URL_WP='${URL_WORDPRESS}';\
 } \
 " > src/app/config.ts
 
